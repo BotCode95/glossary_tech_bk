@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteGlossary = exports.updateGlossary = exports.postGlosary = exports.getGlossaryById = exports.getGlossary = void 0;
+exports.deleteGlossary = exports.updateGlossary = exports.postGlosary = exports.getGlossaryByName = exports.getGlossaryById = exports.getGlossary = void 0;
 const glossary_1 = require("../models/glossary");
 const getGlossary = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -32,6 +32,20 @@ const getGlossaryById = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.getGlossaryById = getGlossaryById;
+const getGlossaryByName = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name } = req.query;
+    try {
+        const glossary = yield glossary_1.Glossary.find({ name });
+        if (!glossary.length) {
+            return res.status(400).json({ message: 'the search returned no results' });
+        }
+        res.status(200).json(glossary);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+exports.getGlossaryByName = getGlossaryByName;
 const postGlosary = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, description } = req.body;
     try {

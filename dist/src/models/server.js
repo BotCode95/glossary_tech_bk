@@ -20,7 +20,7 @@ const db_1 = require("../config/db");
 class Server {
     constructor() {
         this.apiPaths = {
-            apiGlossary: 'api/glossary'
+            apiGlossary: '/api/glossary'
         };
         this.app = (0, express_1.default)();
         this.port = process.env.NODE_ENV === 'dev' ? process.env.PORT_DEVELOPMENT : process.env.PORT;

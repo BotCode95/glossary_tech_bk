@@ -22,6 +22,21 @@ export const getGlossaryById = async (req:Request, res:Response) => {
 	}
 }
 
+export const getGlossaryByName = async (req:Request, res:Response) => {
+	const {name} = req.query
+	try {
+		const glossary = await Glossary.find({name})
+
+		if(!glossary.length) {
+			return res.status(400).json({message: 'the search returned no results'})
+		}
+        
+		res.status(200).json(glossary)
+	} catch (error: any) {
+		res.status(500).json({message: error.message})
+	}
+}
+
 export const postGlosary =async (req:Request, res:Response) => {
 
 	const {name, description} = req.body

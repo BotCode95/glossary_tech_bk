@@ -7,7 +7,7 @@ export class Server {
 	private app : Application
 	private port : string | undefined
 	private apiPaths = {
-		apiGlossary: 'api/glossary'
+		apiGlossary: '/api/glossary'
 	}
 
 
